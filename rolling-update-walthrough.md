@@ -4,6 +4,7 @@
 
 ## Step 1: Create Deployment
 
+>>> COMMAND:
 kubectl apply -f rolling-demo.yaml
 
 - Deployment object is created
@@ -18,6 +19,7 @@ kubectl apply -f rolling-demo.yaml
 
 ## Step 2: Verify Resources
 
+>>> COMMAND:
 kubectl get deploy
 kubectl get rs
 kubectl get pods
@@ -30,6 +32,7 @@ kubectl get pods
 
 ## Step 3: Watch Cluster Changes
 
+>>> COMMAND:
 kubectl get pods -w
 kubectl get rs -w
 
@@ -40,6 +43,7 @@ kubectl get rs -w
 
 ## Step 4: Trigger Rolling Update
 
+>>> IMPERATIVE COMMAND (UPDATE IMAGE):
 kubectl set image deployment/rolling-demo app=nginx:1.26
 
 - Deployment spec is updated in etcd
@@ -101,7 +105,10 @@ kubectl set image deployment/rolling-demo app=nginx:1.26
 
 ## Step 10: Failure Scenario
 
+>>> IMPERATIVE COMMAND (BREAK DEPLOYMENT):
 kubectl set image deployment/rolling-demo app=nginx:wrong
+
+>>> COMMAND:
 kubectl get pods
 
 - New Pods fail to start (ImagePullBackOff)
@@ -115,6 +122,7 @@ kubectl get pods
 
 ## Step 11: Rollback
 
+>>> IMPERATIVE COMMAND (ROLLBACK):
 kubectl rollout undo deployment rolling-demo
 
 - Deployment spec restored in etcd
